@@ -10,6 +10,7 @@
           <FilterSelectVoice
             @selectInput="filterSelectInput = $event"
           ></FilterSelectVoice>
+          <SortVoice @sort="sort = $event"></SortVoice>
         </div>
       </section>
       <section class="my-8">
@@ -39,6 +40,7 @@
 import { ref, computed } from 'vue'
 import FilterInputVoice from '@/components/FilterInputVoice.vue'
 import FilterSelectVoice from '@/components/FilterSelectVoice.vue'
+import SortVoice from '@/components/SortVoice.vue'
 import VoiceList from '@/components/VoiceList.vue'
 import voices from '@/assets/voices.json'
 import { state } from '@/store'
@@ -49,23 +51,33 @@ export default {
   components: {
     FilterInputVoice,
     FilterSelectVoice,
+    SortVoice,
     VoiceList
   },
 
   setup() {
     const filterInput = ref('')
     const filterSelectInput = ref('All')
+    const sort = ref('Default')
     const favouriteVoices = computed(() =>
       voices.filter((voice) => state.favouriteVoiceIds.includes(voice.id))
     )
 
     const filteredVoices = computed(() => {
-      const result =
+      let result =
         filterSelectInput.value === 'All'
           ? voices
           : voices.filter((voice) =>
               voice.tags.includes(filterSelectInput.value)
             )
+
+      if (sort.value !== 'Default') {
+        if (sort.value === 'ASC') {
+          result = [...result.sort((a, b) => (a.name > b.name ? 1 : -1))]
+        } else {
+          result = [...result.sort((a, b) => (a.name > b.name ? -1 : 1))]
+        }
+      }
 
       if (filterInput.value.trim()) {
         const fuse = new Fuse(result, {
@@ -78,7 +90,13 @@ export default {
       return result
     })
 
-    return { filterInput, filterSelectInput, favouriteVoices, filteredVoices }
+    return {
+      filterInput,
+      filterSelectInput,
+      sort,
+      favouriteVoices,
+      filteredVoices
+    }
   }
 }
 </script>
