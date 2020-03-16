@@ -1,5 +1,6 @@
 <template>
   <div
+    :class="{ 'voice--selected': isSelected }"
     class="relative text-center cursor-pointer voice"
     @click="toggleSelection"
   >
@@ -21,7 +22,6 @@
       />
     </p>
     <img
-      :class="{ 'bg-blue-500': isSelected }"
       class="inline bg-gray-500 rounded-full voiceImg"
       :src="require(`@/assets/${icon}`)"
       :alt="name"
@@ -74,6 +74,22 @@ export default {
 
 .voice:hover p {
   @apply text-gray-100;
+}
+
+.voice--selected img.voiceImg {
+  @apply bg-blue-500;
+}
+
+.voice--selected p {
+  @apply text-blue-500;
+}
+
+.voice--selected:hover img.voiceImg {
+  @apply bg-blue-400;
+}
+
+.voice--selected:hover p {
+  @apply text-blue-400;
 }
 
 .voice:hover .voice-favourite-container {
