@@ -7,7 +7,7 @@ export const state = reactive({
 
 export const mutations = {
   selectVoice(voiceId) {
-    state.selectedVoiceId = voiceId
+    state.selectedVoiceId = state.selectedVoiceId === voiceId ? null : voiceId
   },
 
   addFavouriteVoice(voiceId) {

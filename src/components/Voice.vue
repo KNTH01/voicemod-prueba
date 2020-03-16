@@ -1,5 +1,8 @@
 <template>
-  <div class="relative text-center cursor-pointer voice">
+  <div
+    class="relative text-center cursor-pointer voice"
+    @click="$emit('toggleSelection', id)"
+  >
     <p
       @click="$emit('toggleFavourite', id)"
       class="absolute invisible w-6 h-6 bg-gray-100 rounded-full voice-favourite-container"
@@ -18,6 +21,7 @@
       />
     </p>
     <img
+      :class="{ 'bg-blue-500': isSelected }"
       class="inline bg-gray-500 rounded-full voiceImg"
       :src="require(`@/assets/${icon}`)"
       :alt="name"
@@ -42,6 +46,10 @@ export default {
     icon: {
       type: String,
       required: true
+    },
+    isSelected: {
+      type: Boolean,
+      default: false
     },
     isFavourite: {
       type: Boolean,

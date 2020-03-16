@@ -8,8 +8,10 @@
         :id="voice.id"
         :name="voice.name"
         :icon="voice.icon"
+        :isSelected="isSelected(voice.id)"
         :isFavourite="isFavourite(voice.id)"
         @toggleFavourite="toggleFavourite"
+        @toggleSelection="toggleSelection"
       ></Voice>
     </div>
   </div>
@@ -32,6 +34,10 @@ export default {
   },
 
   setup() {
+    const isSelected = (voiceId) => {
+      return state.selectedVoiceId === voiceId
+    }
+
     const isFavourite = (voiceId) => {
       return state.favouriteVoiceIds.includes(voiceId)
     }
@@ -40,9 +46,15 @@ export default {
       mutations.toggleFavouriteVoice(voiceId)
     }
 
+    const toggleSelection = (voiceId) => {
+      mutations.selectVoice(voiceId)
+    }
+
     return {
+      isSelected,
       isFavourite,
-      toggleFavourite
+      toggleFavourite,
+      toggleSelection
     }
   }
 }
