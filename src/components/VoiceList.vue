@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex flex-wrap">
+    <div class="flex flex-wrap" v-if="voices.length > 0">
       <Voice
         class="mx-8 my-4"
         v-for="voice in voices"
@@ -14,6 +14,9 @@
         @toggleSelection="toggleSelection"
       ></Voice>
     </div>
+    <p v-else>
+      No voices...
+    </p>
   </div>
 </template>
 
