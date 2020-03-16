@@ -3,7 +3,9 @@
     <div class="container px-2 mx-auto">
       <h1 class="my-8 text-xl text-center">Voicemod</h1>
       <section>
-        <FilterInputVoice></FilterInputVoice>
+        <FilterInputVoice
+          @inputChange="filterInput = $event"
+        ></FilterInputVoice>
       </section>
       <section class="my-8">
         <header class="flex items-center my-4">
@@ -22,29 +24,43 @@
           </h1>
           <div class="flex-grow h-0 ml-8 border-t-2 border-gray-800"></div>
         </header>
-        <VoiceList :voices="voices"></VoiceList>
+        <VoiceList :voices="filteredVoices"></VoiceList>
       </section>
     </div>
   </div>
 </template>
 
 <script>
+import { ref, computed } from 'vue'
 import FilterInputVoice from '@/components/FilterInputVoice.vue'
 import VoiceList from '@/components/VoiceList.vue'
 import voices from '@/assets/voices.json'
 import { state } from '@/store'
-import { computed } from 'vue'
+import Fuse from 'fuse.js'
 
 export default {
   name: 'App',
   components: { FilterInputVoice, VoiceList },
 
   setup() {
+    const filterInput = ref('')
     const favouriteVoices = computed(() =>
       voices.filter((voice) => state.favouriteVoiceIds.includes(voice.id))
     )
 
-    return { voices, favouriteVoices }
+    const filteredVoices = computed(() => {
+      if (filterInput.value.trim()) {
+        const fuse = new Fuse(voices, {
+          keys: ['name']
+        })
+
+        return fuse.search(filterInput.value).map((elem) => elem.item)
+      }
+
+      return voices
+    })
+
+    return { filterInput, favouriteVoices, filteredVoices }
   }
 }
 </script>

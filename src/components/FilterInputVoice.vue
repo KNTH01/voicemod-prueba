@@ -27,13 +27,12 @@
 import { ref, computed, watch } from 'vue'
 
 export default {
-  setup() {
+  setup(props, { emit }) {
     const filterInput = ref('')
     const displayClose = computed(() => filterInput.value.trim() !== '')
 
-    watch(filterInput, (newValue, oldValue) => {
-      console.log('newValue :', newValue)
-      console.log('oldValue :', oldValue)
+    watch(filterInput, (newValue) => {
+      emit('inputChange', newValue)
     })
 
     return {
