@@ -17,12 +17,18 @@
 
 <script>
 import Voice from './Voice.vue'
-import voices from '@/assets/voices.json'
 import { state, mutations } from '@/store'
 
 export default {
   components: {
     Voice
+  },
+
+  props: {
+    voices: {
+      type: Array,
+      required: true
+    }
   },
 
   setup() {
@@ -35,7 +41,6 @@ export default {
     }
 
     return {
-      voices,
       isFavourite,
       toggleFavourite
     }
