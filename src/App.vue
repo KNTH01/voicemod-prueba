@@ -6,11 +6,16 @@
         <FilterInputVoice
           @inputChange="filterInput = $event"
         ></FilterInputVoice>
-        <div>
-          <FilterSelectVoice
-            @selectInput="filterSelectInput = $event"
-          ></FilterSelectVoice>
-          <SortVoice @sort="sort = $event"></SortVoice>
+        <div class="flex">
+          <FilterSelectVoice @selectInput="filterSelectInput = $event">
+          </FilterSelectVoice>
+          <SortVoice class="ml-4" @sort="sort = $event"></SortVoice>
+          <button
+            @click="selectRandomVoice"
+            class="ml-4 opacity-75 hover:opacity-100 focus:outline-none"
+          >
+            <img src="@/assets/button-random.svg" alt="Random" />
+          </button>
         </div>
       </section>
       <section class="my-8">
@@ -43,7 +48,7 @@ import FilterSelectVoice from '@/components/FilterSelectVoice.vue'
 import SortVoice from '@/components/SortVoice.vue'
 import VoiceList from '@/components/VoiceList.vue'
 import voices from '@/assets/voices.json'
-import { state } from '@/store'
+import { state, mutations } from '@/store'
 import Fuse from 'fuse.js'
 
 export default {
@@ -90,10 +95,18 @@ export default {
       return result
     })
 
+    const selectRandomVoice = () => {
+      const voices = filteredVoices.value
+      mutations.selectVoice(
+        voices[Math.floor(Math.random() * voices.length)].id
+      )
+    }
+
     return {
       filterInput,
       filterSelectInput,
       sort,
+      selectRandomVoice,
       favouriteVoices,
       filteredVoices
     }
