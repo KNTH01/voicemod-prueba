@@ -3,17 +3,24 @@
     <div class="container px-2 mx-auto">
       <h1 class="mt-8 mb-16 text-4xl font-semibold text-center">Voicemod</h1>
 
-      <section class="flex">
+      <section class="flex flex-wrap">
         <FilterInputVoice
+          class="mb-8 lg:mb-0"
           @inputChange="filterInput = $event"
         ></FilterInputVoice>
-        <div class="flex justify-end flex-grow">
-          <FilterSelectVoice @selectInput="filterSelectInput = $event">
+        <div class="flex flex-wrap flex-grow sm:flex-no-wrap lg:justify-end">
+          <FilterSelectVoice
+            class="mb-8 sm:mb-0"
+            @selectInput="filterSelectInput = $event"
+          >
           </FilterSelectVoice>
-          <SortVoice class="ml-6" @sort="sort = $event"></SortVoice>
+          <SortVoice
+            class="mb-8 sm:ml-6 sm:mb-0"
+            @sort="sort = $event"
+          ></SortVoice>
           <button
             @click="selectRandomVoice"
-            class="ml-6 opacity-75 hover:opacity-100 focus:outline-none"
+            class="mb-8 ml-6 opacity-75 sm:ml-6 sm:mb-0 hover:opacity-100 focus:outline-none"
           >
             <img src="@/assets/button-random.svg" alt="Random" />
           </button>
