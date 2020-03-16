@@ -2,7 +2,7 @@ import { reactive } from 'vue'
 
 export const state = reactive({
   selectedVoiceId: null,
-  favouriteVoices: []
+  favouriteVoiceIds: []
 })
 
 export const mutations = {
@@ -11,19 +11,19 @@ export const mutations = {
   },
 
   addFavouriteVoice(voiceId) {
-    state.favouriteVoices.push(voiceId)
+    state.favouriteVoiceIds.push(voiceId)
   },
 
   removeFavouriteVoice(voiceId) {
-    const index = state.favouriteVoices.findIndex((id) => id === voiceId)
+    const index = state.favouriteVoiceIds.findIndex((id) => id === voiceId)
 
     if (index > -1) {
-      state.favouriteVoices.splice(index, 1)
+      state.favouriteVoiceIds.splice(index, 1)
     }
   },
 
   toggleFavouriteVoice(voiceId) {
-    if (state.favouriteVoices.includes(voiceId)) {
+    if (state.favouriteVoiceIds.includes(voiceId)) {
       this.removeFavouriteVoice(voiceId)
     } else {
       this.addFavouriteVoice(voiceId)

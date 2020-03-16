@@ -37,7 +37,7 @@ export default {
 
   setup() {
     const favouriteVoices = computed(() =>
-      voices.filter((voice) => state.favouriteVoices.includes(voice.id))
+      voices.filter((voice) => state.favouriteVoiceIds.includes(voice.id))
     )
 
     return { voices, favouriteVoices }

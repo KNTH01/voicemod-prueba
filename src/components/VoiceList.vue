@@ -33,7 +33,7 @@ export default {
 
   setup() {
     const isFavourite = (voiceId) => {
-      return state.favouriteVoices.includes(voiceId)
+      return state.favouriteVoiceIds.includes(voiceId)
     }
 
     const toggleFavourite = (voiceId) => {
