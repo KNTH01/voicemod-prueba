@@ -2,6 +2,9 @@
   <div id="app">
     <div class="container px-2 mx-auto">
       <h1 class="my-8 text-xl text-center">Voicemod</h1>
+      <section>
+        <FilterInputVoice></FilterInputVoice>
+      </section>
       <section class="my-8">
         <header class="flex items-center my-4">
           <h1 class="font-semibold tracking-tighter uppercase ">
@@ -26,6 +29,7 @@
 </template>
 
 <script>
+import FilterInputVoice from '@/components/FilterInputVoice.vue'
 import VoiceList from '@/components/VoiceList.vue'
 import voices from '@/assets/voices.json'
 import { state } from '@/store'
@@ -33,7 +37,7 @@ import { computed } from 'vue'
 
 export default {
   name: 'App',
-  components: { VoiceList },
+  components: { FilterInputVoice, VoiceList },
 
   setup() {
     const favouriteVoices = computed(() =>
