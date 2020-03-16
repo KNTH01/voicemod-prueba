@@ -1,23 +1,25 @@
 <template>
   <div id="app">
     <div class="container px-2 mx-auto">
-      <h1 class="my-8 text-xl text-center">Voicemod</h1>
+      <h1 class="mt-8 mb-16 text-4xl font-semibold text-center">Voicemod</h1>
+
       <section class="flex">
         <FilterInputVoice
           @inputChange="filterInput = $event"
         ></FilterInputVoice>
-        <div class="flex">
+        <div class="flex justify-end flex-grow">
           <FilterSelectVoice @selectInput="filterSelectInput = $event">
           </FilterSelectVoice>
-          <SortVoice class="ml-4" @sort="sort = $event"></SortVoice>
+          <SortVoice class="ml-6" @sort="sort = $event"></SortVoice>
           <button
             @click="selectRandomVoice"
-            class="ml-4 opacity-75 hover:opacity-100 focus:outline-none"
+            class="ml-6 opacity-75 hover:opacity-100 focus:outline-none"
           >
             <img src="@/assets/button-random.svg" alt="Random" />
           </button>
         </div>
       </section>
+
       <section class="my-8">
         <header class="flex items-center my-4">
           <h1 class="font-semibold tracking-tighter uppercase ">
