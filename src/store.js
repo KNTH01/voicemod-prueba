@@ -1,6 +1,6 @@
-import Vue from 'vue'
+import { reactive } from 'vue'
 
-export const state = Vue.observable({
+export const state = reactive({
   selectedVoiceId: null,
   favouriteVoices: []
 })
@@ -19,6 +19,14 @@ export const mutations = {
 
     if (index > -1) {
       state.favouriteVoices.splice(index, 1)
+    }
+  },
+
+  toggleFavouriteVoice(voiceId) {
+    if (state.favouriteVoices.includes(voiceId)) {
+      this.removeFavouriteVoice(voiceId)
+    } else {
+      this.addFavouriteVoice(voiceId)
     }
   }
 }

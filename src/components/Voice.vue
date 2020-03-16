@@ -1,11 +1,19 @@
 <template>
   <div class="relative text-center cursor-pointer voice">
     <p
+      @click="$emit('toggleFavourite', id)"
       class="absolute invisible w-6 h-6 bg-gray-100 rounded-full voice-favourite-container"
     >
       <img
+        v-if="!isFavourite"
         class="voice-favourite"
         src="@/assets/voice-favourite-off.svg"
+        alt="not favourite voice"
+      />
+      <img
+        v-else
+        class="voice-favourite"
+        src="@/assets/voice-favourite.svg"
         alt="favourite voice"
       />
     </p>
@@ -23,6 +31,10 @@
 <script>
 export default {
   props: {
+    id: {
+      type: String,
+      required: true
+    },
     name: {
       type: String,
       required: true
@@ -30,6 +42,10 @@ export default {
     icon: {
       type: String,
       required: true
+    },
+    isFavourite: {
+      type: Boolean,
+      default: false
     }
   }
 }
