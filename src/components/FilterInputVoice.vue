@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="relative mt-1">
+    <div class="relative">
       <div
         class="absolute inset-y-0 left-0 flex items-center pl-1 pointer-events-none"
       >
@@ -8,7 +8,7 @@
       </div>
       <input
         v-model="filterInput"
-        class="w-full py-2 pl-12 pr-3 leading-tight text-gray-400 bg-black rounded-full shadow appearance-none focus:outline-none focus:shadow-outline"
+        class="w-full py-2 pl-12 pr-3 text-gray-400 bg-black rounded-full shadow appearance-none focus:outline-none"
         type="text"
         placeholder="Search"
       />
