@@ -1,7 +1,7 @@
 <template>
   <div
     class="relative text-center cursor-pointer voice"
-    @click="$emit('toggleSelection', id)"
+    @click="toggleSelection"
   >
     <p
       @click="$emit('toggleFavourite', id)"
@@ -54,6 +54,14 @@ export default {
     isFavourite: {
       type: Boolean,
       default: false
+    }
+  },
+
+  methods: {
+    toggleSelection(event) {
+      if (!event.target.classList.contains('voice-favourite')) {
+        this.$emit('toggleSelection', this.id)
+      }
     }
   }
 }
